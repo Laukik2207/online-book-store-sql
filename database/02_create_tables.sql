@@ -137,4 +137,48 @@ CREATE TABLE payments (
         ON DELETE CASCADE
 );
 
+CREATE TABLE reviews (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    customer_id INT NOT NULL,
+
+    book_id INT NOT NULL,
+
+    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+
+    review_text TEXT,
+
+    review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (book_id)
+        REFERENCES books(book_id)
+        ON DELETE CASCADE,
+
+    UNIQUE(customer_id, book_id)
+);
+
+CREATE TABLE wishlists (
+    wishlist_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    customer_id INT NOT NULL,
+
+    book_id INT NOT NULL,
+
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (book_id)
+        REFERENCES books(book_id)
+        ON DELETE CASCADE,
+
+    UNIQUE(customer_id, book_id)
+);
+
 
