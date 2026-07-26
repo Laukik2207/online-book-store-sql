@@ -57,3 +57,84 @@ CREATE TABLE book_categories (
         REFERENCES categories(category_id)
         ON DELETE CASCADE
 );
+
+
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM(
+        'Pending',
+        'Processing',
+        'Shipped',
+        'Delivered',
+        'Cancelled'
+    ) DEFAULT 'Pending',
+
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id)
+        ON DELETE CASCADE
+);
+
+
+CREATE TABLE order_items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    order_id INT NOT NULL,
+
+    book_id INT NOT NULL,
+
+    quantity INT NOT NULL CHECK(quantity > 0),
+
+    unit_price DECIMAL(8,2) NOT NULL,
+
+    FOREIGN KEY (order_id)
+        REFERENCES orders(order_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (book_id)
+        REFERENCES books(book_id)
+        ON DELETE CASCADE
+);
+
+
+CREATE TABLE payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    order_id INT NOT NULL UNIQUE,
+
+    amount DECIMAL(10,2) NOT NULL,
+
+    payment_method ENUM(
+        'Credit Card',
+        'Debit Card',
+        'UPI',
+        'Net Banking',
+        'Cash on Delivery'
+    ),
+
+    payment_status ENUM(
+        'Pending',
+        'Completed',
+        'Failed',
+        'Refunded'
+    ) DEFAULT 'Pending',
+
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (order_id)
+        REFERENCES orders(order_id)
+        ON DELETE CASCADE
+);
+
+
