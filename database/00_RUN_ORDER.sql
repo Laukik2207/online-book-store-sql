@@ -1,0 +1,28 @@
+-- =====================================================
+-- MASTER SETUP SCRIPT
+-- Online Bookstore Database
+-- =====================================================
+-- Runs the pure-SQL portions in the correct order.
+-- NOTE: Two Python steps must run in between (see README):
+--   After 03: run  python python/load_books_data.py  (loads ~1928 books)
+--             ...wait, books load BEFORE customers is fine either way, but
+--   order-items depend on books, so run load_books_data.py before generate_transactions.py
+--
+-- Recommended full sequence:
+--   1. mysql < database/01_create_database.sql
+--   2. mysql online_book_store < database/02_create_tables.sql
+--   3. python python/load_books_data.py           (books, authors, categories)
+--   4. mysql online_book_store < database/03_generate_sample_data.sql  (customers, orders)
+--   5. mysql online_book_store < database/04_indexes.sql
+--   6. mysql online_book_store < database/07_triggers.sql   (BEFORE transactions so stock auto-updates)
+--   7. python python/generate_transactions.py      (order_items, payments, reviews, wishlists)
+--   8. mysql online_book_store < database/05_views.sql
+--   9. mysql online_book_store < database/06_stored_procedures.sql
+--  10. mysql online_book_store < database/08_business_queries.sql   (verification)
+--  11. mysql online_book_store < database/09_window_functions.sql   (verification)
+--  12. python python/data_cleaning_eda.py
+--  13. python python/analytics_pipeline.py         (KPIs + charts)
+--
+-- This file itself is documentation of the run order.
+
+SELECT 'See comments above for the full reproducible run sequence.' AS Instructions;

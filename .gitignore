@@ -1,15 +1,27 @@
-# macOS
+# ===== Credentials & secrets (NEVER commit) =====
+python/db_config.py
+.env
+*.env
+
+# ===== Claude session data (local only) =====
+.claude/
+
+# ===== macOS =====
 .DS_Store
 
-# Windows
+# ===== Windows =====
 Thumbs.db
 
-# VS Code
+# ===== VS Code =====
 .vscode/
 
-# JetBrains
+# ===== JetBrains =====
 .idea/
 
-# Python cache (for future data cleaning scripts)
+# ===== Python =====
 __pycache__/
 *.pyc
+*.pyo
+.ipynb_checkpoints/
+venv/
+.venv/

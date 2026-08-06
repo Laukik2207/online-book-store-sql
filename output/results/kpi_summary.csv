@@ -1,0 +1,14 @@
+kpi,value
+total_books,1928.0
+total_customers,100.0
+total_orders,110.0
+total_revenue,249920.9
+total_reviews,167.0
+avg_customer_ltv,17570.58
+avg_orders_per_customer,1.83
+repeat_rate,83.33333
+avg_order_value,2272.01
+revenue_per_customer,4165.35
+avg_book_price,485.28
+avg_book_rating,3.76
+total_inventory_units,56015.0
